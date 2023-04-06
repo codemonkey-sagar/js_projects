@@ -1,4 +1,3 @@
-// 5. Filter the items by typing in the filter field
 // 6. Add localStorage to persist items
 // 7. Click on an item to put into "edit mode" and add to form
 // 8. Update item
@@ -15,7 +14,7 @@ const buttonClasses = 'remove-item btn-link text-red';
 const iconClasses = 'fa-solid fa-xmark';
 
 // 1. Add items to the list via the form
-function addItem(e) {
+function onAddItemSubmit(e) {
   e.preventDefault();
   const newItem = itemInput.value;
 
@@ -26,16 +25,8 @@ function addItem(e) {
   }
 
   // Create List Item
-  const li = document.createElement('LI');
-  li.textContent = newItem;
-
-  const button = createButton(buttonClasses);
-  const icon = createIcon(iconClasses);
-
-  button.appendChild(icon);
-  li.appendChild(button);
-
-  itemList.appendChild(li);
+  addItemToDOM(newItem);
+  addItemToStorage(newItem);
   checkUI();
 
   itemInput.value = '';
@@ -51,6 +42,19 @@ function createIcon(classes) {
   const i = document.createElement('I');
   i.className = classes;
   return i;
+}
+
+function addItemToDOM(item) {
+  const li = document.createElement('LI');
+  li.textContent = item;
+
+  const button = createButton(buttonClasses);
+  const icon = createIcon(iconClasses);
+
+  button.appendChild(icon);
+  li.appendChild(button);
+
+  itemList.appendChild(li);
 }
 
 // 2. Remove item from list by clicking the 'X' button
@@ -74,7 +78,7 @@ function clearItems() {
 // 4. Remove filter item and clear btn dynamically form UI
 function checkUI() {
   const items = itemList.querySelectorAll('LI');
-  const displayStyle = items.length === 0 ? 'none' : 'block';
+  let displayStyle = items.length === 0 ? 'none' : 'block';
 
   clearBtn.style.display = displayStyle;
   filter.style.display = displayStyle;
@@ -87,15 +91,49 @@ function filterItems(e) {
 
   items.forEach((item) => {
     const itemName = item.firstChild.textContent.toLowerCase();
-    const displayStyle = itemName.indexOf(text) != -1 ? 'flex' : 'none';
-    item.sytle.display = displayStyle;
+    let displayStyle = itemName.indexOf(text) != -1 ? 'flex' : 'none';
+    item.style.display = displayStyle;
   });
 }
 
-// Event Listener
-itemForm.addEventListener('submit', addItem);
-itemList.addEventListener('click', removeItem);
-clearBtn.addEventListener('click', clearItems);
-filter.addEventListener('input', filterItems);
+// 6. Add localStorage to persist data
+function getItemFromStorage() {
+  let itemFromStorage;
 
-checkUI();
+  if (localStorage.getItem('items') === null) {
+    itemFromStorage = [];
+  } else {
+    itemFromStorage = JSON.parse(localStorage.getItem('items'));
+  }
+
+  return itemFromStorage;
+}
+
+function addItemToStorage(item) {
+  let itemFromStorage = getItemFromStorage();
+  itemFromStorage.push(item);
+
+  // convert to JSON string and set to local storage
+  localStorage.setItem('items', JSON.stringify(itemFromStorage));
+}
+
+function displayItems() {
+  const itemFromStorage = getItemFromStorage();
+  itemFromStorage.forEach((item) => {
+    addItemToDOM(item);
+    checkUI();
+  });
+}
+
+// Initialize app
+function init() {
+  itemForm.addEventListener('submit', onAddItemSubmit);
+  itemList.addEventListener('click', removeItem);
+  clearBtn.addEventListener('click', clearItems);
+  filter.addEventListener('input', filterItems);
+  document.addEventListener('DOMContentLoaded', displayItems);
+
+  checkUI();
+}
+
+init();
