@@ -1,6 +1,3 @@
-// 6. Add localStorage to persist items
-// 7. Click on an item to put into "edit mode" and add to form
-// 8. Update item
 // 9. Deploy To Netlify
 
 const itemForm = document.getElementById('item-form');
@@ -8,6 +5,8 @@ const itemInput = document.getElementById('item-input');
 const itemList = document.getElementById('item-list');
 const clearBtn = document.getElementById('clear');
 const filter = document.getElementById('filter');
+const formBtn = itemForm.querySelector('button');
+let isEditMode = false;
 
 // Cache the DOM elements
 const buttonClasses = 'remove-item btn-link text-red';
@@ -22,6 +21,20 @@ function onAddItemSubmit(e) {
   if (!newItem) {
     alert('Please Add an Item');
     return;
+  }
+
+  // Check for edit mode
+  if (isEditMode) {
+    const itemToEdit = itemList.querySelector('.edit-mode');
+    removeItemFromStorage(itemToEdit.textContent);
+    itemToEdit.classList.remove('edit-mode');
+    itemToEdit.remove();
+    isEditMode = false;
+  } else {
+    if (checkIfItemExists(newItem)) {
+      alert('That item already exist!');
+      return;
+    }
   }
 
   // Create List Item
@@ -58,13 +71,28 @@ function addItemToDOM(item) {
 }
 
 // 2. Remove item from list by clicking the 'X' button
-function removeItem(e) {
-  if (e.target.parentElement.classList.contains('remove-item')) {
-    if (confirm('Are you sure?')) {
-      e.target.parentElement.parentElement.remove();
-    }
+function removeItem(item) {
+  if (confirm('Are you sure?')) {
+    // Remove item from DOM
+    item.remove();
+
+    // Remove item from storage
+    removeItemFromStorage(item.textContent);
   }
   checkUI();
+}
+
+function onClickItem(e) {
+  if (e.target.parentElement.classList.contains('remove-item')) {
+    removeItem(e.target.parentElement.parentElement);
+  } else {
+    setItemToEdit(e.target);
+  }
+}
+
+function checkIfItemExists(item) {
+  const itemFromStorage = getItemFromStorage();
+  return itemFromStorage.includes(item);
 }
 
 // 3. Clear all the item with clear button
@@ -72,6 +100,10 @@ function clearItems() {
   while (itemList.firstChild) {
     itemList.removeChild(itemList.firstChild);
   }
+
+  // Clear form local storage
+  localStorage.removeItem('items');
+
   checkUI();
 }
 
@@ -82,6 +114,11 @@ function checkUI() {
 
   clearBtn.style.display = displayStyle;
   filter.style.display = displayStyle;
+
+  formBtn.innerHTML = `<i class="fa-solid fa-plus"></i> Add Item`;
+  formBtn.style.backgroundColor = '#333';
+
+  isEditMode = false;
 }
 
 // 5. Filter the item by typing in the filter field
@@ -96,7 +133,7 @@ function filterItems(e) {
   });
 }
 
-// 6. Add localStorage to persist data
+// 6. Adding localStorage to persist data
 function getItemFromStorage() {
   let itemFromStorage;
 
@@ -125,10 +162,37 @@ function displayItems() {
   });
 }
 
+function removeItemFromStorage(item) {
+  let itemFromStorage = getItemFromStorage();
+
+  // Filter out item to be removed
+  itemFromStorage = itemFromStorage.filter((i) => i !== item);
+
+  // Reset to localStorage
+  localStorage.setItem('items', JSON.stringify(itemFromStorage));
+}
+
+// 7. Click on an item to put it on 'edit' mode and add to form
+function setItemToEdit(item) {
+  isEditMode = true;
+
+  itemList.querySelectorAll('LI').forEach((item) => {
+    item.classList.remove('edit-mode');
+  });
+
+  item.classList.add('edit-mode');
+  itemInput.value = item.textContent;
+
+  formBtn.innerHTML = `<i class="fa-solid fa-pen"></i> Update Item`;
+  formBtn.style.backgroundColor = '#228b22';
+}
+
+// 8. Update Item
+
 // Initialize app
 function init() {
   itemForm.addEventListener('submit', onAddItemSubmit);
-  itemList.addEventListener('click', removeItem);
+  itemList.addEventListener('click', onClickItem);
   clearBtn.addEventListener('click', clearItems);
   filter.addEventListener('input', filterItems);
   document.addEventListener('DOMContentLoaded', displayItems);

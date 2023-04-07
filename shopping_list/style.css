@@ -16,11 +16,6 @@ body {
   background-color: #f5f5f5;
 }
 
-.container {
-  background-color: #fff;
-  border-radius: 20px;
-}
-
 header {
   display: flex;
   justify-content: flex-start;
@@ -37,6 +32,12 @@ header h1 {
   max-width: 500px;
   margin: 30px auto;
   padding: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+.edit-mode {
+  color: #ccc;
 }
 
 /* Form & Input */
