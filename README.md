@@ -5,7 +5,7 @@ A collection of frontend project using the techology like HTML, CSS, JS, React.
 ## Projects
 
 1. [KeyCode-Event](https://github.com/codemonkey-sagar/js_projects/tree/main/keycode_event)
-2. [Shopping-List](shoppingbox.netlify.app)
+2. [Shopping-List](https://shoppingbox.netlify.app)
 
 ## Getting Started
 
