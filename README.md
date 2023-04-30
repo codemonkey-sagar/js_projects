@@ -9,6 +9,7 @@ A collection of frontend project using the techology like HTML, CSS, JS, React.
 3. [Joke-Generator](https://github.com/codemonkey-sagar/js_projects/tree/main/joke_generator)
 4. [User-Generator](https://github.com/codemonkey-sagar/js_projects/tree/main/user_generator)
 5. [TypiCode-Todos](https://github.com/codemonkey-sagar/js_projects/tree/main/typicode_todos)
+6. [Adopt-Me](https://github.com/codemonkey-sagar/js_projects/tree/main/adopt_me)
 
 ## Getting Started
 
