@@ -1,4 +1,4 @@
-* {
+/* * {
   box-sizing: border-box;
   color: #333;
 }
@@ -363,4 +363,109 @@ form .pet {
 
 .mini .loader {
   font-size: 34px;
+} */
+
+/* ========================================== */
+/* ---------------Tailwind CSS--------------- */
+/* ========================================== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: "Lucida Sans", Verdana, sans-serif;
+  }
+}
+
+@layer components {
+  .search-input {
+    @apply mb-5 block w-60;
+  }
+}
+
+@layer utilities {
+  .grayed-out-disabled {
+    @apply disabled:opacity-50;
+  }
+}
+
+/* --- css way ---  */
+.details {
+  width: 95%;
+  margin: 0 auto;
+  padding: 15px;
+  border-radius: 9px;
+  margin-bottom: 25px;
+}
+
+.loader {
+  font-size: 100px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mini.loading-pane {
+  height: 34px;
+}
+
+.mini .loader {
+  font-size: 34px;
+}
+
+.search-params button,
+#modal button,
+#modal a,
+.details button {
+  background-color: #ad343e;
+  padding: 5px 25px;
+  color: white;
+  font-size: 18px;
+  border: #333 1px solid;
+  border-radius: 5px;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+#modal a {
+  display: inline-block;
+  margin-right: 15px;
+  text-decoration: none;
+}
+
+#modal {
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal:empty {
+  display: none;
+}
+
+#modal > div {
+  background-color: white;
+  max-width: 500px;
+  padding: 15px;
+  text-align: center;
+  border-radius: 30px;
+  background: #faeff0;
+}
+
+#modal .buttons button {
+  display: inline-block;
+  margin-right: 15px;
 }
