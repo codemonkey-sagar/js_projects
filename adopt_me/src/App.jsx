@@ -1,11 +1,10 @@
-import { useState } from "react";
-import React from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { useState, lazy, Suspense } from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AdoptedPetContext from "./AdoptedPetContext";
-import SearchParams from "./SearchParams";
-import Details from "./Details";
+
+const Details = lazy(() => import("./Details"));
+const SearchParams = lazy(() => import("./SearchParams"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,12 +24,24 @@ const App = () => {
         background: "url(https://pets-images.dev-apis.com/pets/wallpaperA.jpg",
       }}
     >
-      <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <Suspense
+          fallback={
+            <div className="loading-pane">
+              <h2 className="loader">loading</h2>
+            </div>
+          }
+        >
           <AdoptedPetContext.Provider value={AdoptedPet}>
             <header className="mb-10 w-full bg-gradient-to-b from-yellow-400 via-orange-500 to-red-500 p-7 text-center">
-              <Link className="text-6xl text-white hover:text-gray-200" to="/">
-                Adopt Me
+              <Link
+                className="bg-no-repeat text-6xl text-white hover:text-gray-200 "
+                to="/"
+                style={{
+                  backgroundImage: `url(http://static.frontendmasters.com/resources/2019-05-02-complete-intro-react-v5/image-logo.png)`,
+                }}
+              >
+                <span className="opacity-0">Adopt Me</span>
               </Link>
             </header>
             <Routes>
@@ -38,12 +49,10 @@ const App = () => {
               <Route path="/" element={<SearchParams />} />
             </Routes>
           </AdoptedPetContext.Provider>
-        </QueryClientProvider>
-      </BrowserRouter>
+        </Suspense>
+      </QueryClientProvider>
     </div>
   );
 };
 
-const container = document.getElementById("root");
-const root = createRoot(container);
-root.render(<App />);
+export default App;

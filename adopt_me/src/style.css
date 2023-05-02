@@ -391,13 +391,6 @@ form .pet {
 }
 
 /* --- css way ---  */
-.details {
-  width: 95%;
-  margin: 0 auto;
-  padding: 15px;
-  border-radius: 9px;
-  margin-bottom: 25px;
-}
 
 .loader {
   font-size: 100px;
@@ -450,6 +443,7 @@ form .pet {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 50px;
 }
 
 #modal:empty {
@@ -459,7 +453,7 @@ form .pet {
 #modal > div {
   background-color: white;
   max-width: 500px;
-  padding: 15px;
+  padding: 50px;
   text-align: center;
   border-radius: 30px;
   background: #faeff0;

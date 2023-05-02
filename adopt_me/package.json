@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": "adopt_me: Simplifying pet adoption by connecting families with their perfect furry match",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build:client": "vite build --outDir ../dist/client",
+    "build:server": "vite build --outDir ../dist/server --ssr ServerApp.jsx",
+    "build": "npm run build:client && npm run build:server",
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
-    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +33,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.5",
+    "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0"
