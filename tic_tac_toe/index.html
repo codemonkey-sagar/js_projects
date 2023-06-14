@@ -1,17 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- link to font family  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- link to favicon  -->
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
   <!-- link to css  -->
   <link rel="stylesheet" href="style.css">
   <title>Tic Tac Toe</title>
 </head>
+
 <body>
-  
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="img/tic-tac-toe.png" alt="Tic Tac Toe Logo">
+      </a>
+      <div class="sound" tabindex="0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+          <g fill="#fff">
+            <polygon points="14.025,38.004 14.025,61.993 31.548,61.993 55.537,85.982 55.537,14.018 31.552,38.004">
+            </polygon>
+            <path
+              d="M67.41,34.095l-4.243,4.239c6.43,6.432,6.43,16.896,0,23.324L67.41,65.9C76.179,57.129,76.179,42.864,67.41,34.095z">
+            </path>
+            <path
+              d="M75.89,25.616l-4.241,4.239c11.105,11.105,11.105,29.176,0,40.284l4.241,4.241C89.337,60.934,89.337,39.06,75.89,25.616z">
+            </path>
+          </g>
+        </svg>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="board">
+      <div class="box" tabindex="0"></div>
+      <div class="box" tabindex="0"></div>
+      <div class="box" tabindex="0"></div>
+      <div class="box" tabindex="0"></div>
+      <div class="box" tabindex="0"></div>
+      <div class="box" tabindex="0"></div>
+      <div class="box" tabindex="0"></div>
+      <div class="box" tabindex="0"></div>
+      <div class="box" tabindex="0"></div>
+    </div>
+
+    <div class="scores">
+      <p class="player1">
+        <span class="p1">Player (X)</span>
+        <span class="score">0</span>
+      </p>
+      <p class="ties">
+        <span class="tie-text">Tie</span>
+        <span class="score">0</span>
+      </p>
+      <p class="player2">
+        <span class="p2">Player (O)</span>
+        <span class="score">0</span>
+      </p>
+      <div class="swap">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+          <g fill="#fff">
+            <path class="p2"
+              d="M66.219,85h1.562c9.92-0.14,19.38-1.2,21.08-2.779c0.422-3.44,0.9-5.101-15.142-12.341 c-2.279-1.22-1.059-5.939-1.059-5.939c4.822-3.48,8.123-11.521,8.123-17.98c0-11.14-5.263-16.419-13.001-16.959h-1.562 c-7.738,0.54-13,5.799-13,16.959c0,6.46,3.301,14.5,8.121,17.98c0,0,1.221,4.719-1.059,5.939c-16.041,7.24-15.562,8.9-15.14,12.341 C46.84,83.8,56.301,84.86,66.219,85z M30.217,69h1.564c9.918-0.14,19.378-1.2,21.078-2.779c0.422-3.44,0.9-5.1-15.14-12.34 c-2.279-1.22-1.059-5.939-1.059-5.939c4.82-3.48,8.121-11.521,8.121-17.98c0-11.14-5.262-16.42-13-16.96h-1.564 c-7.738,0.54-13,5.8-13,16.96c0,6.459,3.301,14.5,8.121,17.98c0,0,1.221,4.72-1.059,5.939c-16.041,7.24-15.562,8.9-15.14,12.34 C10.839,67.8,20.299,68.86,30.217,69z">
+            </path>
+          </g>
+        </svg>
+        <div class="turn">
+          <p class="multi-player">
+            <span>2</span>P
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
 
 
   <!-- link to js  -->
   <script src="script.js"></script>
 </body>
+
 </html>
