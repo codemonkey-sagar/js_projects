@@ -67,6 +67,17 @@ main {
   background-color: var(--color-black);
 }
 
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 130px;
+}
+
+.box:hover {
+  cursor: pointer;
+}
+
 .box:focus-visible {
   outline: 0;
   background-color: #333333;
@@ -118,6 +129,10 @@ main {
   .board>div {
     width: 120px;
     height: 120px;
+  }
+
+  .box {
+    font-size: 80px;
   }
 
   .scores {
