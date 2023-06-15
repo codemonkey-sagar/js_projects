@@ -7,7 +7,7 @@ html {
   box-sizing: border-box;
 }
 
-*, 
+*,
 *::after,
 *::before {
   box-sizing: inherit;
@@ -55,13 +55,13 @@ main {
 
 .board {
   display: grid;
-  grid-template-rows: repeat(3, 200px);
-  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   background-color: var(--color-white);
 }
 
-.board > div {
+.board>div {
   height: 200px;
   width: 200px;
   background-color: var(--color-black);
@@ -79,13 +79,13 @@ main {
   text-transform: uppercase;
 }
 
-.p1, 
-.p2, 
+.p1,
+.p2,
 .tie-text {
   font-size: 24px;
 }
 
-.scores > p {
+.scores>p {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -93,14 +93,15 @@ main {
 
 .score {
   font-size: 48px;
+  font-weight: 800;
 }
 
-.swap > svg {
+.swap>svg {
   height: 36px;
   width: 36px;
 }
 
-.multi-player{
+.multi-player {
   margin-top: 0;
   font-weight: 800;
   font-size: 24px;
@@ -109,4 +110,23 @@ main {
 
 .multi-player span {
   font-size: 16px;
+}
+
+
+/* Responsive Design  */
+@media screen and (max-width: 620px) {
+  .board>div {
+    width: 120px;
+    height: 120px;
+  }
+
+  .scores {
+    column-gap: 24px;
+  }
+
+  .p1,
+  .p2,
+  .tie-text {
+    font-size: 18px;
+  }
 }
