@@ -10,14 +10,28 @@ const clickSound = new Audio("sound/click.mp3");
 const drawSound = new Audio("sound/draw.wav");
 const winSound = new Audio("sound/win.wav");
 
-console.log(winSound);``
+let isSoundOn = true;
+const soundDiv = document.querySelector(".sound");
+
+function toggleSound() {
+  isSoundOn = !isSoundOn;
+
+  const paths = soundDiv.getElementsByTagName("path");
+  for (let i = 0; i < paths.length; i++) {
+    paths[i].style.display = isSoundOn ? "block" : "none";
+  }
+}
+
+soundDiv.addEventListener("click", toggleSound);
 
 for (let i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener("click", handleBoxClick);
 }
 
 function handleBoxClick(event) {
-  clickSound.play();
+  if (isSoundOn) {
+    clickSound.play();
+  }
   const selectedBox = event.target;
 
   if (selectedBox.textContent !== "") {
@@ -27,19 +41,25 @@ function handleBoxClick(event) {
   selectedBox.textContent = currentPlayer;
 
   if (checkWinCondition() === currentPlayer) {
-    setTimeout(() => {
+    if (isSoundOn) {
       winSound.play();
-      alert(`Player: ${currentPlayer} Win!!!`);
-      reset();
-    }, 0);
+    }
     currentPlayer === 'X' ? player1Score++ : player2Score++;
     document.querySelector(".player1 .score").textContent = player1Score;
     document.querySelector(".player2 .score").textContent = player2Score;
+    setTimeout(() => {
+      alert(`Player: ${currentPlayer} Win!!!`);
+      reset();
+    }, 0);
+
   } else if (checkDrawCondition()) {
+    if (isSoundOn) {
+      drawScore.currentTime = 0;
+      drawSound.play();
+    }
     drawScore++;
     document.querySelector(".ties .score").textContent = drawScore;
     setTimeout(() => {
-      drawSound.play();
       alert("DRAW game!!!")
       reset();
     }, 0)
