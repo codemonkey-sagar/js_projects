@@ -126,7 +126,7 @@ main {
 
 /* Responsive Design  */
 @media screen and (max-width: 620px) {
-  .board>div {
+  .board > div {
     width: 120px;
     height: 120px;
   }

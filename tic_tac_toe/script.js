@@ -5,11 +5,19 @@ let drawScore = 0;
 
 const boxes = document.querySelectorAll(".box");
 
+// Audio Sound 
+const clickSound = new Audio("sound/click.mp3");
+const drawSound = new Audio("sound/draw.wav");
+const winSound = new Audio("sound/win.wav");
+
+console.log(winSound);``
+
 for (let i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener("click", handleBoxClick);
 }
 
 function handleBoxClick(event) {
+  clickSound.play();
   const selectedBox = event.target;
 
   if (selectedBox.textContent !== "") {
@@ -20,6 +28,7 @@ function handleBoxClick(event) {
 
   if (checkWinCondition() === currentPlayer) {
     setTimeout(() => {
+      winSound.play();
       alert(`Player: ${currentPlayer} Win!!!`);
       reset();
     }, 0);
@@ -30,6 +39,7 @@ function handleBoxClick(event) {
     drawScore++;
     document.querySelector(".ties .score").textContent = drawScore;
     setTimeout(() => {
+      drawSound.play();
       alert("DRAW game!!!")
       reset();
     }, 0)
