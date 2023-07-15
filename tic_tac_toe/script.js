@@ -47,10 +47,11 @@ function handleBoxClick(event) {
     currentPlayer === 'X' ? player1Score++ : player2Score++;
     document.querySelector(".player1 .score").textContent = player1Score;
     document.querySelector(".player2 .score").textContent = player2Score;
+    // currentPlayer = currentPlayer === "X" ? "O" : "X";
     setTimeout(() => {
       alert(`Player: ${currentPlayer} Win!!!`);
       reset();
-    }, 0);
+    }, 100);
 
   } else if (checkDrawCondition()) {
     if (isSoundOn) {
@@ -59,10 +60,11 @@ function handleBoxClick(event) {
     }
     drawScore++;
     document.querySelector(".ties .score").textContent = drawScore;
+    // currentPlayer = currentPlayer === "X" ? "O" : "X";
     setTimeout(() => {
       alert("DRAW game!!!")
       reset();
-    }, 0)
+    }, 100)
   } else {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
   }

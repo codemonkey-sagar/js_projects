@@ -1,10 +1,15 @@
 :root {
   --color-black: #000000;
   --color-white: #FFFFFF;
+
+  --font-size: 1.6rem;
 }
 
 html {
   box-sizing: border-box;
+  /* 10/16 * 100: converting default font size to 10px */
+  font-size: 62.5%;
+  height: 100%;
 }
 
 *,
@@ -17,6 +22,9 @@ body {
   margin: 0;
   padding: 0;
   color: white;
+  font-size: var(--font-size);
+  overflow-x: hidden;
+  height: 100%;
   background-color: var(--color-black);
   font-family: 'Open Sans', sans-serif;
 }
@@ -24,7 +32,7 @@ body {
 
 /* Header Design  */
 header {
-  padding: 16px;
+  padding: 1.6rem;
 }
 
 header nav {
@@ -34,13 +42,13 @@ header nav {
 
 .logo,
 .sound {
-  width: 44px;
-  height: 44px;
+  width: 4.4rem;
+  height: 4.4rem;
 }
 
 .logo img,
 .sound svg {
-  width: 44px;
+  width: 4.4rem;
   height: 100%;
 }
 
@@ -49,8 +57,9 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 32px;
-  margin-top: 32px;
+  row-gap: 3.2rem;
+  margin-top: 3.2rem;
+  max-height: 100vh;
 }
 
 .board {
@@ -62,8 +71,8 @@ main {
 }
 
 .board>div {
-  height: 200px;
-  width: 200px;
+  height: 20rem;
+  width: 20rem;
   background-color: var(--color-black);
 }
 
@@ -71,7 +80,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 130px;
+  font-size: 13rem;
 }
 
 .box:hover {
@@ -85,7 +94,7 @@ main {
 
 .scores {
   display: flex;
-  column-gap: 64px;
+  column-gap: 6.4rem;
   align-items: center;
   text-transform: uppercase;
 }
@@ -93,7 +102,7 @@ main {
 .p1,
 .p2,
 .tie-text {
-  font-size: 24px;
+  font-size: 2.4rem;
 }
 
 .scores>p {
@@ -103,45 +112,53 @@ main {
 }
 
 .score {
-  font-size: 48px;
+  font-size: 4.8rem;
   font-weight: 800;
 }
 
 .swap>svg {
-  height: 36px;
-  width: 36px;
+  height: 3.6rem;
+  width: 3.6rem;
 }
 
 .multi-player {
   margin-top: 0;
   font-weight: 800;
-  font-size: 24px;
+  font-size: 2.4rem;
   letter-spacing: 4px;
 }
 
 .multi-player span {
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 
 
 /* Responsive Design  */
 @media screen and (max-width: 620px) {
-  .board > div {
-    width: 120px;
-    height: 120px;
+  .board>div {
+    width: 12rem;
+    height: 12rem;
   }
 
   .box {
-    font-size: 80px;
+    font-size: 8rem;
   }
 
   .scores {
-    column-gap: 24px;
+    column-gap: 2.4rem;
   }
 
   .p1,
   .p2,
   .tie-text {
-    font-size: 18px;
+    font-size: 1.8rem;
+  }
+}
+
+
+@media screen and (max-height: 900px) {
+  .board>div{
+    width: 16rem;
+    height: 16rem;
   }
 }
