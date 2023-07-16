@@ -17,6 +17,20 @@ nav img {
 
 
 /* testing  */
+
+.wrong {
+  background-color: red;
+}
+
+#statement {
+  text-align: center;
+  font-size: 2rem;
+}
+
+button {
+  color: black;
+}
+
 body {
   margin: 1rem auto;
   padding: 3rem;
